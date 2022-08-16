@@ -11,10 +11,15 @@ def add_csv():
             if i > 0:
                 dict = {'Name': row[0], 'Price':clean_price(row[1]), 'Quantity': clean_quantity(row[2]), 'Date': clean_date(row[3])}
                 inventory.append(dict)
+                new_product = Product(product_name=dict['Name'], product_price=dict['Price'],
+                                      product_quantity=dict['Quantity'],
+                                      date_update=dict['Date'])
+                session.add(new_product)
             else:
                 i = 1
-                continue
-    print(inventory)
+        session.commit()
+
+
 
 
 def menu():
@@ -74,8 +79,10 @@ def app():
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     # app()
-    add_csv()
+    # add_csv()
 
+    for product in session.query(Product):
+        print(product)
 
 
 
