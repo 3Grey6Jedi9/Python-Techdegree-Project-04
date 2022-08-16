@@ -3,10 +3,19 @@ import datetime
 import csv
 
 def add_csv():
+    inventory = []
     with open('inventory.csv') as csvfile:
         data = csv.reader(csvfile)
+        i = 0
         for row in data:
-            print(row)
+            if i > 0:
+                dict = {'Name': row[0], 'Price':clean_price(row[1])}
+                inventory.append(dict)
+            else:
+                i = 1
+                continue
+    print(inventory)
+
 
 def menu():
     while True:
@@ -31,20 +40,10 @@ def clean_quantity(quantstr):
     return quantity
 
 def clean_price(pricestr):
-    L = []
-    i = 0
-    for b in pricestr:
-        if i > 0:
-            L.append(b)
-            i = 1
-        else:
-            i = 1
-            continue
-    L.pop(1)
+    pricels = pricestr.split('$')
+    price = int(float(pricels[1])*100)
+    return price
 
-    price = L[0] + L[1] + L[2]
-
-    return int(price)
 
 def clean_date(datestr):
     date = datetime.datetime.strptime(datestr, '%m/%d/%Y')
