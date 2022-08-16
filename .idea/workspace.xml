@@ -4,6 +4,7 @@
     <list default="true" id="a4a20767-651e-4577-9ae8-8c9b7c26e711" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
       <updated>1660574183164</updated>
       <workItem from="1660574185549" duration="2325000" />
       <workItem from="1660578098700" duration="1114000" />
-      <workItem from="1660600168691" duration="11124000" />
+      <workItem from="1660600168691" duration="12210000" />
     </task>
     <servers />
   </component>
