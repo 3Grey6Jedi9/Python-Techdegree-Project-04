@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
-
+import datetime
 
 
 
@@ -16,6 +16,12 @@ class Product(Base):
     product_quantity = Column('Quantity', Integer)
     product_price = Column('Price', Integer)
     date_update = Column('Updated', Date)
+
+    def
+
+
+ if __name__ == '__main__':
+    Base.metadata.create_all(engine)
 
 
 
