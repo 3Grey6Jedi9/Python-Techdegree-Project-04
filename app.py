@@ -1,7 +1,12 @@
 from models import Base, session, Product, engine
+import datetime
+import csv
 
-
-
+def add_csv():
+    with open('inventory.csv') as csvfile:
+        data = csv.reader(csvfile)
+        for row in data:
+            print(row)
 
 def menu():
     while True:
@@ -20,6 +25,7 @@ def menu():
             input(''' \nPlease choose one of the options above.
             \rA number from 1-5.
             \rPress enter to try again.''')
+
 
 
 
@@ -43,7 +49,8 @@ def app():
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
-    app()
+    # app()
+    add_csv()
 
 
 
