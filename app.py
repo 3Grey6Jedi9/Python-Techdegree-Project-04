@@ -9,7 +9,7 @@ def add_csv():
         i = 0
         for row in data:
             if i > 0:
-                dict = {'Name': row[0], 'Price':clean_price(row[1])}
+                dict = {'Name': row[0], 'Price':clean_price(row[1]), 'Quantity': clean_quantity(row[2]), 'Date': clean_date(row[3])}
                 inventory.append(dict)
             else:
                 i = 1
