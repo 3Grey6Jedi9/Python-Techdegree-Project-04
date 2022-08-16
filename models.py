@@ -22,6 +22,5 @@ class Product(Base):
         return f'Name: {self.product_name} Quantity: {self.product_quantity} Price: {self.product_price} Update: {self.date_update}'
 
 
-if __name__ == '__main__':
-    Base.metadata.create_all(engine)
+
 
