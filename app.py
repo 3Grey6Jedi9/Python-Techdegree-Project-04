@@ -46,6 +46,11 @@ def clean_price(pricestr):
 
     return int(price)
 
+def clean_date(datestr):
+    date = datetime.datetime.strptime(datestr, '%m/%d/%Y')
+    return date
+
+
 
 
 
