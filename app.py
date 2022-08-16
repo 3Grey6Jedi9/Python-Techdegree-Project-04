@@ -26,6 +26,26 @@ def menu():
             \rA number from 1-5.
             \rPress enter to try again.''')
 
+def clean_quantity(quantstr):
+    quantity = int(quantstr)
+    return quantity
+
+def clean_price(pricestr):
+    L = []
+    i = 0
+    for b in pricestr:
+        if i > 0:
+            L.append(b)
+            i = 1
+        else:
+            i = 1
+            continue
+    L.pop(1)
+
+    price = L[0] + L[1] + L[2]
+
+    return int(price)
+
 
 
 
