@@ -6,18 +6,17 @@ def add_csv():
     inventory = []
     with open('inventory.csv') as csvfile:
         data = csv.reader(csvfile)
-        i = 0
         for row in data:
-            if i > 0:
+            if len(row[2]) < 3:
                 dict = {'Name': row[0], 'Price':clean_price(row[1]), 'Quantity': clean_quantity(row[2]), 'Date': clean_date(row[3])}
                 inventory.append(dict)
                 new_product = Product(product_name=dict['Name'], product_price=dict['Price'],
                                       product_quantity=dict['Quantity'],
                                       date_update=dict['Date'])
                 session.add(new_product)
-            else:
-                i = 1
         session.commit()
+
+
 
 
 
@@ -81,9 +80,14 @@ if __name__ == '__main__':
     # app()
     # add_csv()
 
-    for product in session.query(Product):
-        print(product)
+    for p in session.query(Product):
+        print(p)
 
+    a = session.query(Product).filter_by(product_name='Apple - Granny Smith').count()
+    print(a)
+
+# Estoy añadiendo cada vez mas datos a los que hay quizas tenga que elminar y volver a crear la base de datos
+# ver como puedo evitar eso y dejarlo bien
 
 
 
