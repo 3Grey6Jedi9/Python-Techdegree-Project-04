@@ -27,7 +27,7 @@ def menu():
     while True:
         print("""
         \n           MAIN MENU\n
-        \r1) View details [press 'V']
+        \r1) View products details [press 'V']
         \r2) Add product in the database [press 'A']
         \r3) Make a backup [press 'B']
         \r4) Exit [press 'E']
@@ -69,7 +69,8 @@ def app():
     while app_running:
         choice = menu()
         if choice == 'V':
-            for product in inventory #print it numerated so I can chose one and show its characteristics
+            for product in inventory:
+                print(f'''{inventory.index(product)+1} <-- {product['Name']} --> {inventory.index(product)+1}''')
         elif choice == 'A':
             pass
         elif choice == 'B':
