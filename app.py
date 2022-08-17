@@ -13,7 +13,8 @@ def add_csv():
                 new_product = Product(product_name=dict['Name'], product_price=dict['Price'],
                                       product_quantity=dict['Quantity'],
                                       date_update=dict['Date'])
-                session.add(new_product)
+                if new_product not in session.query(Product):
+                    session.add(new_product)
         session.commit()
 
 
@@ -78,13 +79,10 @@ def app():
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     # app()
-    # add_csv()
+    add_csv()
 
     for p in session.query(Product):
         print(p)
-
-    a = session.query(Product).filter_by(product_name='Apple - Granny Smith').count()
-    print(a)
 
 # Estoy añadiendo cada vez mas datos a los que hay quizas tenga que elminar y volver a crear la base de datos
 # ver como puedo evitar eso y dejarlo bien
