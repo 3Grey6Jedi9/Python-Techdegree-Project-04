@@ -16,6 +16,7 @@ def add_csv():
                 if new_product not in session.query(Product):
                     session.add(new_product)
         session.commit()
+        return inventory 
 
 
 
@@ -25,19 +26,18 @@ def add_csv():
 def menu():
     while True:
         print("""
-        \nPRODUCTS
-        \r1) Add product
-        \r2) View all
-        \r3) Search for product
-        \r4) Product Analysis 
-        \r5) Exit
+        \nMAIN MENU
+        \r1) View details [press 'V']
+        \r2) Add product in the database [press 'A']
+        \r3) Make a backup [press 'B']
+        \r4) Exit [press 'E']
         """)
-        choice = input('What would you like to do? ')
-        if choice in ['1','2','3','4','5']:
+        choice = input('What would you like to do? ').upper()
+        if choice in ['V', 'A','B','E']:
             return choice
         else:
             input(''' \nPlease choose one of the options above.
-            \rA number from 1-5.
+            \r['V', 'A','B','E']
             \rPress enter to try again.''')
 
 def clean_quantity(quantstr):
@@ -62,13 +62,11 @@ def app():
     app_running = True
     while app_running:
         choice = menu()
-        if choice == '1':
+        if choice == 'V':
             pass
-        elif choice == '2':
+        elif choice == 'A':
             pass
-        elif choice == '3':
-            pass
-        elif choice == '4':
+        elif choice == 'B':
             pass
         else:
             print('GOODBYE')
