@@ -63,6 +63,16 @@ def inventory_updated(inventoryapp):
         inventory = inventory0
     return inventory
 
+def backup(inv):
+    inventory = inventory_updated(inv)
+    with open('inventory_backup.csv', 'a') as csvbackup:
+        fieldnames = ['Name', 'Price', 'Quantity', 'Date']
+        backupwriter = csv.DictWriter(csvbackup, fieldnames=fieldnames)
+
+        backupwriter.writeheader()
+
+        for item in inventory:
+            backupwriter.writerow({'Name': item['Name'], 'Price': item['Price'], 'Quantity': item['Quantity'], 'Date': item['Date']})
 
 
 
@@ -98,7 +108,7 @@ def app():
                 inventory.append(dict)
                 inventory_updated(inventory)
         elif choice == 'B':
-            pass
+            backup(inventory)
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
@@ -116,8 +126,8 @@ if __name__ == '__main__':
     app()
     #add_csv()
 
-    #for p in session.query(Product):
-        #print(p)
+   # for p in session.query(Product):
+    #    print(p)
 
 
 
