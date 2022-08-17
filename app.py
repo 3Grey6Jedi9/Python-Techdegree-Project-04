@@ -55,6 +55,18 @@ def clean_date(datestr):
     return date
 
 
+def inventory_updated(inventoryapp):
+    inventory0 = add_csv()
+    if inventoryapp != inventory0:
+        inventory = inventoryapp
+    else:
+        inventory = inventory0
+    return inventory
+
+
+
+
+
 
 
 
@@ -84,11 +96,18 @@ def app():
                 session.add(new_product)
                 dict = dict = {'Name': new_product.product_name, 'Price': new_product.product_price, 'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
                 inventory.append(dict)
+                inventory_updated(inventory)
         elif choice == 'B':
             pass
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
+
+
+
+
+
+
 
 
 
@@ -99,6 +118,7 @@ if __name__ == '__main__':
 
     #for p in session.query(Product):
         #print(p)
+
 
 
 
