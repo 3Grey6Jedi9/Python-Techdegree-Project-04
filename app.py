@@ -79,7 +79,11 @@ def app():
             price = clean_price(input("Please enter the product's price[for example:$9.99]:"))
             quantity = clean_quantity(input("Now I'll need you to tell me the quantity: "))
             date = datetime.datetime.now()
-            new_product = Product()
+            new_product = Product(product_name=name, product_price=price, product_quantity=quantity, date_update=date)
+            if new_product not in session.query(Product):
+                session.add(new_product)
+                dict = dict = {'Name': new_product.product_name, 'Price': new_product.product_price, 'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
+                inventory.append(dict)
         elif choice == 'B':
             pass
         else:
