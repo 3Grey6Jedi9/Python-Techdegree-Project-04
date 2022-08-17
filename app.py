@@ -71,8 +71,12 @@ def app():
         if choice == 'V':
             for product in inventory:
                 print(f'''{inventory.index(product)+1} <-- {product['Name']} --> {inventory.index(product)+1}''')
+            p = int(input('Now enter the product id number in order to know more about it: '))
+            print(f'''\n{inventory[p-1]}''')
         elif choice == 'A':
-            pass
+            message = input("You have selected adding a new product...Press Enter to proceed")
+            name = input("Please enter the product's name: ")
+            price = clean_price(input("Please enter the product's price[for example:$9.99]:"))
         elif choice == 'B':
             pass
         else:
