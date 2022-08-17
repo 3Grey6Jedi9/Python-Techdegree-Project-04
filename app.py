@@ -26,7 +26,7 @@ def add_csv():
 def menu():
     while True:
         print("""
-        \nMAIN MENU
+        \n           MAIN MENU\n
         \r1) View details [press 'V']
         \r2) Add product in the database [press 'A']
         \r3) Make a backup [press 'B']
@@ -69,7 +69,7 @@ def app():
         elif choice == 'B':
             pass
         else:
-            print('GOODBYE')
+            print('GOODBYE SWEETHEART')
             app_running = False
 
 
