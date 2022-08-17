@@ -77,6 +77,9 @@ def app():
             message = input("You have selected adding a new product...Press Enter to proceed")
             name = input("Please enter the product's name: ")
             price = clean_price(input("Please enter the product's price[for example:$9.99]:"))
+            quantity = clean_quantity(input("Now I'll need you to tell me the quantity: "))
+            date = datetime.datetime.now()
+            new_product = Product()
         elif choice == 'B':
             pass
         else:
