@@ -58,12 +58,18 @@ def clean_date(datestr):
 
 
 
+
+
+
+
+
 def app():
+    inventory = add_csv()
     app_running = True
     while app_running:
         choice = menu()
         if choice == 'V':
-            pass
+            for product in inventory #print it numerated so I can chose one and show its characteristics
         elif choice == 'A':
             pass
         elif choice == 'B':
