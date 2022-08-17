@@ -15,6 +15,9 @@ def add_csv():
                                       date_update=dict['Date'])
                 if new_product not in session.query(Product):
                     session.add(new_product)
+                else:
+                    session.query(Product).filter_by(product_name=new_product.product_name).delete()
+                    session.add(new_product)
         session.commit()
         return inventory
 
@@ -93,8 +96,16 @@ def app():
         if choice == 'V':
             for product in inventory:
                 print(f'''{inventory.index(product)+1} <-- {product['Name']} --> {inventory.index(product)+1}''')
-            p = int(input('Now enter the product id number in order to know more about it: '))
-            print(f'''\n{inventory[p-1]}''')
+            while ValueError:
+                try:
+                    p = int(input('\nEnter the product id number in order to know more about it: '))
+                    if p not in range(1,len(inventory)):
+                        raise ValueError('\nPlease select an available id')
+                except ValueError as err:
+                    print('{}'.format(err))
+                else:
+                    print(f'''\n{inventory[p - 1]}''')
+                    break
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
             name = input("Please enter the product's name: ")
