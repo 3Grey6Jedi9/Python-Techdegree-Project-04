@@ -58,6 +58,25 @@ def clean_date(datestr):
     return date
 
 
+
+def print_date(datestrp):
+    if list(datetime.datetime.strftime(datestrp, '%d'))[1] == '1' and list(datetime.datetime.strftime(datestrp, '%d'))[0] != '1':
+        date = datetime.datetime.strftime(datestrp, '%B %dst of %Y')
+    elif list(datetime.datetime.strftime(datestrp, '%d'))[1] == '2' and list(datetime.datetime.strftime(datestrp, '%d'))[0] != '1':
+        date = datetime.datetime.strftime(datestrp, '%B %dsd of %Y')
+    elif list(datetime.datetime.strftime(datestrp, '%d'))[1] == '3' and list(datetime.datetime.strftime(datestrp, '%d'))[0] != '1':
+        date = datetime.datetime.strftime(datestrp, '%B %dsd of %Y')
+    else:
+        date = datetime.datetime.strftime(datestrp, '%B %dth of %Y')
+    return date
+
+
+
+
+
+
+
+
 def inventory_updated(inventoryapp):
     inventory0 = add_csv()
     if inventoryapp != inventory0:
@@ -99,12 +118,16 @@ def app():
             while ValueError:
                 try:
                     p = int(input('\nEnter the product id number in order to know more about it: '))
-                    if p not in range(1,len(inventory)):
+                    if p not in range(1,len(inventory)+1):
                         raise ValueError('\nPlease select an available id')
                 except ValueError as err:
                     print('{}'.format(err))
                 else:
-                    print(f'''\n{inventory[p - 1]}''')
+                    for key, value in inventory[p-1].items():
+                        if key != 'Date':
+                            print(f'{key}: {value}', end='   ')
+                        else:
+                            print(f'{key}: {print_date(value)}')
                     break
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
@@ -154,10 +177,11 @@ def app():
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     app()
-    #add_csv()
+    # add_csv()
 
    # for p in session.query(Product):
     #    print(p)
+
 
 
 
