@@ -124,10 +124,12 @@ def app():
                     print('{}'.format(err))
                 else:
                     for key, value in inventory[p-1].items():
-                        if key != 'Date':
-                            print(f'{key}: {value}', end='   ')
+                        if key != 'Date' and key != 'Price':
+                            print(f'\n{key}: {value}')
+                        elif key == 'Price':
+                            print(f'\n{key}: ${value/100}')
                         else:
-                            print(f'{key}: {print_date(value)}')
+                            print(f'\n{key}: {print_date(value)}')
                     break
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
