@@ -13,10 +13,10 @@ def add_csv():
                 new_product = Product(product_name=dict['Name'], product_price=dict['Price'],
                                       product_quantity=dict['Quantity'],
                                       date_update=dict['Date'])
-                if new_product not in session.query(Product):
+                if new_product.product_name not in session.query(Product):
                     session.add(new_product)
                 else:
-                    session.query(Product).filter_by(product_name=new_product.product_name).delete()
+                    session.delete(new_product.product_name)
                     session.add(new_product)
         session.commit()
         return inventory
@@ -150,13 +150,13 @@ def app():
                     break
             date = datetime.datetime.now()
             new_product = Product(product_name=name, product_price=price, product_quantity=quantity, date_update=date)
-            if new_product not in session.query(Product):
+            if new_product.product_name not in session.query(Product):
                 session.add(new_product)
                 dict = {'Name': new_product.product_name, 'Price': new_product.product_price, 'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
                 inventory.append(dict)
                 inventory_updated(inventory)
             else:
-                session.query(Product).filter_by(product_name=new_product.product_name).delete()
+                session.delete(new_product.product_name)
                 session.add(new_product)
                 dict = {'Name': new_product.product_name, 'Price': new_product.product_price,
                         'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
