@@ -2,24 +2,43 @@ from models import Base, session, Product, engine
 import datetime
 import csv
 
+
 def add_csv():
     inventory = []
     with open('inventory.csv') as csvfile:
         data = csv.reader(csvfile)
         for row in data:
-            if len(row[2]) < 3:
+            if len(row[2]) < 4:
                 dict = {'Name': row[0], 'Price':clean_price(row[1]), 'Quantity': clean_quantity(row[2]), 'Date': clean_date(row[3])}
-                inventory.append(dict)
                 new_product = Product(product_name=dict['Name'], product_price=dict['Price'],
                                       product_quantity=dict['Quantity'],
                                       date_update=dict['Date'])
-                if new_product.product_name not in session.query(Product):
+                if session.query(Product).count() >= 27:
+                    print('We are in')
+                    L = []
+                    for p in session.query(Product.product_name):
+                        L.append(p.product_name)
+                    if f'{new_product.product_name}' not in L:
+                        session.add(new_product)
+                        inventory.append(dict)
+                    else:
+                        for p in session.query(Product):
+                            a = str(p).split(';')
+                            name = str(a[0]).split(':')
+                            if name[1] == f' {new_product.product_name}':
+                                p.product_price = new_product.product_price
+                                p.product_quantity = new_product.product_quantity
+                                p.date_update = new_product.date_update
+                            else:
+                                continue
+                if session.query(Product).count() < 27:
                     session.add(new_product)
-                else:
-                    session.delete(new_product.product_name)
-                    session.add(new_product)
+                    inventory.append(dict)
         session.commit()
-        return inventory
+        products = session.query(Product)
+        return products
+
+
 
 
 
@@ -108,13 +127,17 @@ def backup(inv):
 
 
 def app():
-    inventory = add_csv()
+    products = add_csv()
     app_running = True
     while app_running:
         choice = menu()
         if choice == 'V':
-            for product in inventory:
-                print(f'''{inventory.index(product)+1} <-- {product['Name']} --> {inventory.index(product)+1}''')
+            i = 1
+            for product in products:
+                a = str(product).split(';')
+                name = str(a[0]).split(':')
+                print(f'{i}   {name[1]}   {i}')
+                i += 1
             while ValueError:
                 try:
                     p = int(input('\nEnter the product id number in order to know more about it: '))
@@ -150,39 +173,102 @@ def app():
                     break
             date = datetime.datetime.now()
             new_product = Product(product_name=name, product_price=price, product_quantity=quantity, date_update=date)
-            if new_product.product_name not in session.query(Product):
-                session.add(new_product)
-                dict = {'Name': new_product.product_name, 'Price': new_product.product_price, 'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
-                inventory.append(dict)
-                inventory_updated(inventory)
-            else:
-                session.delete(new_product.product_name)
-                session.add(new_product)
-                dict = {'Name': new_product.product_name, 'Price': new_product.product_price,
+            for p in session.query(Product):
+                a = str(p).split(';')
+                name = str(a[0]).split(':')
+                if name[1] != f' {new_product.product_name}':
+                    continue
+                else:
+                    p = new_product
+            session.add(new_product)
+            session.commit()
+            dict = {'Name': new_product.product_name, 'Price': new_product.product_price,
                         'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
-                inventory.append(dict)
-                inventory_updated(inventory)
+            for d in inventory:
+                if d['Name'] == dict['Name']:
+                    inventory.remove(d)
+            inventory.append(dict)
+            inventory_updated(inventory)
         elif choice == 'B':
             backup(inventory)
+            print(inventory)
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
-
-
-
-
-
-
+    print(inventory)
 
 
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
-    app()
-    # add_csv()
+    #app()
+    add_csv()
 
-   # for p in session.query(Product):
-    #    print(p)
+    #for p in session.query(Product):
+        #print(p)
+
+# Mirar de nuevo SQLAlchemy y crear la aplicación correctamente
+
+# Poner la base de datos en el mismo formato
+
+    #for p in session.query(Product):
+        #a = str(p).split(';')
+        #name = str(a[0]).split(':')
+        #print(name[1])
+
+
+    #product01 = Product(product_name='Tom', product_price='$4.44',
+            #product_quantity=34,
+            #date_update=datetime.datetime.now())
+    #print(f' {product01.product_name}')
+    #product02 = Product(product_name='Tom', product_price=990,
+            #product_quantity=dict['Quantity'],
+            #date_update=dict['Date'])
+
+    #if product01.product_name == product02.product_name:
+        #print('True')
+    #else:
+        #print('False')
+
+    #a = Product.product_name=product02.product_name
+    #print(a)
+
+    #for p in session.query(Product):
+        #if p != product02:
+            #print(False)
+        #else:
+            #continue
+
+
+   # Solucionar duplicados en la creación de la base de datos. Si el producto ya exite no se añade solo si no estaba
+
+   # Fix the app() function
+
+
+    #for p in session.query(Product):
+        #a = str(p).split(';')
+        #name = str(a[0]).split(':')
+        #b = f' {new_product.product_name}'
+        #c = name[1]
+        #if b == c:
+            #print('I found it')
+        #else:
+            #continue
+
+
+
+    #for p in session.query(Product):
+        #p.product_name = 'Tom'
+        #print(p)
+
+    #L = []
+    #for p in session.query(Product.product_name):
+        #L.append(p.product_name)
+    #print(L)
+
+    #if 'Radish' in L:
+        #print(True)
+
 
 
 
