@@ -121,11 +121,14 @@ def print_nice(a):
     c = b.split(';')
     d = str(c[2])
     e = d.split(':')
+    f = str(c[3]).split(':')
+    print(f[1])
+    dt = datetime.datetime.strptime(f[1],' %Y-%m-%d')
     print(f'''\n {c[0]}
     \n{c[1]}
     \n Price: ${int(e[1])/100}
-    \n{c[3]}''')
-
+    \n Updated: {datetime.datetime.strftime(dt,'%B %d %Y')}''')
+# Put days more fancy
 
 
 
