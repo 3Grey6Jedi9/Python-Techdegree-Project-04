@@ -14,7 +14,6 @@ def add_csv():
                                       product_quantity=dict['Quantity'],
                                       date_update=dict['Date'])
                 if session.query(Product).count() >= 27:
-                    print('We are in')
                     L = []
                     for p in session.query(Product.product_name):
                         L.append(p.product_name)
@@ -117,6 +116,7 @@ def backup(inv):
 
 
 
+def print_nice():
 
 
 
@@ -132,27 +132,27 @@ def app():
     while app_running:
         choice = menu()
         if choice == 'V':
-            i = 1
-            for product in products:
-                a = str(product).split(';')
-                name = str(a[0]).split(':')
-                print(f'{i}   {name[1]}   {i}')
-                i += 1
+            id = 1
+            for product in session.query(Product.product_name):
+                print(f'{id}   {product.product_name}')
+                id += 1
             while ValueError:
                 try:
                     p = int(input('\nEnter the product id number in order to know more about it: '))
-                    if p not in range(1,len(inventory)+1):
+                    if p not in range(1,session.query(Product).count()+1):
                         raise ValueError('\nPlease select an available id')
                 except ValueError as err:
                     print('{}'.format(err))
                 else:
-                    for key, value in inventory[p-1].items():
-                        if key != 'Date' and key != 'Price':
-                            print(f'\n{key}: {value}')
-                        elif key == 'Price':
-                            print(f'\n{key}: ${value/100}')
-                        else:
-                            print(f'\n{key}: {print_date(value)}')
+                    for q in session.query(Product.product_id):
+                        if p == q.product_id:
+                           j = 1
+                           for a in session.query(Product):
+                               if p == j:
+                                   print(a)
+                               else:
+                                   j += 1
+                                   continue
                     break
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
@@ -201,8 +201,8 @@ def app():
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
-    #app()
-    add_csv()
+    app()
+    #add_csv()
 
     #for p in session.query(Product):
         #print(p)
