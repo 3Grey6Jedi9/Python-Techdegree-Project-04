@@ -116,7 +116,16 @@ def backup(inv):
 
 
 
-def print_nice():
+def print_nice(a):
+    b = str(a)
+    c = b.split(';')
+    d = str(c[2])
+    e = d.split(':')
+    print(f'''\n {c[0]}
+    \n{c[1]}
+    \n Price: ${int(e[1])/100}
+    \n{c[3]}''')
+
 
 
 
@@ -149,7 +158,7 @@ def app():
                            j = 1
                            for a in session.query(Product):
                                if p == j:
-                                   print(a)
+                                   print_nice(a)
                                else:
                                    j += 1
                                    continue
