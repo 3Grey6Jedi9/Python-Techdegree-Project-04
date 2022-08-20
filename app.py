@@ -199,7 +199,22 @@ def app():
             updated = clean_date(updatedstr)
             updated_nice = print_date_nice(updated)
             new_product = Product(product_name=name , product_price=price , product_quantity=clean_quantity(quantity), date_update=updated)
-            
+            L = []
+            for p in session.query(Product.product_name):
+                L.append(p.product_name)
+            if f'{new_product.product_name}' not in L:
+                session.add(new_product)
+            else:
+                for p in session.query(Product):
+                    a = str(p).split(';')
+                    name = str(a[0]).split(':')
+                    if name[1] == f' {new_product.product_name}':
+                        p.product_price = new_product.product_price
+                        p.product_quantity = new_product.product_quantity
+                        p.date_update = new_product.date_update
+                    else:
+                        continue
+            session.commit()
         elif choice == 'B':
             backup(inventory)
             print(inventory)
