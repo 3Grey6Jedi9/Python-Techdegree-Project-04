@@ -249,29 +249,3 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
     app()
     #add_csv()
-
-
-# One last thing BACKUP
-
-
-
-    #for p in session.query(Product):
-        #print(p)
-
-    #a = session.query(Product).all()
-    #for item in a:
-        #print(item)
-
-
-
-    #def backup():
-        #inventory = inventory_updated()
-        #with open('inventory_backup.csv', 'w') as csvbackup:
-            #fieldnames = ['Name', 'Price', 'Quantity', 'Date']
-            #backupwriter = csv.DictWriter(csvbackup, fieldnames=fieldnames)
-
-            #backupwriter.writeheader()
-
-            #for item in inventory:
-                #backupwriter.writerow({'Name': item['Name'], 'Quantity': item['Quantity'], 'Price': item['Price'], 'Date': item['Date']})
-
