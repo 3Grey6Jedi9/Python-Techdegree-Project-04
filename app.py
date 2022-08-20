@@ -147,8 +147,6 @@ def print_date_nice(datep):
 
 
 
-# Fix option V it displays all instead of the selection
-
 
 def app():
     products = add_csv()
@@ -233,112 +231,5 @@ if __name__ == '__main__':
     app()
     #add_csv()
 
-    #for p in session.query(Product):
-        #print(p)
 
-# Mirar de nuevo SQLAlchemy y crear la aplicación correctamente
-
-# Poner la base de datos en el mismo formato
-
-    #for p in session.query(Product):
-        #a = str(p).split(';')
-        #name = str(a[0]).split(':')
-        #print(name[1])
-
-
-    #product01 = Product(product_name='Tom', product_price='$4.44',
-            #product_quantity=34,
-            #date_update=datetime.datetime.now())
-    #print(f' {product01.product_name}')
-    #product02 = Product(product_name='Tom', product_price=990,
-            #product_quantity=dict['Quantity'],
-            #date_update=dict['Date'])
-
-    #if product01.product_name == product02.product_name:
-        #print('True')
-    #else:
-        #print('False')
-
-    #a = Product.product_name=product02.product_name
-    #print(a)
-
-    #for p in session.query(Product):
-        #if p != product02:
-            #print(False)
-        #else:
-            #continue
-
-
-   # Solucionar duplicados en la creación de la base de datos. Si el producto ya exite no se añade solo si no estaba
-
-   # Fix the app() function
-
-
-    #for p in session.query(Product):
-        #a = str(p).split(';')
-        #name = str(a[0]).split(':')
-        #b = f' {new_product.product_name}'
-        #c = name[1]
-        #if b == c:
-            #print('I found it')
-        #else:
-            #continue
-
-
-
-    #for p in session.query(Product):
-        #p.product_name = 'Tom'
-        #print(p)
-
-    #L = []
-    #for p in session.query(Product.product_name):
-        #L.append(p.product_name)
-    #print(L)
-
-    #if 'Radish' in L:
-        #print(True)
-
-
-    #p = 5
-
-
-
-    #for q in session.query(Product.product_id):
-        #if p == q.product_id:
-            #j = 1
-            #for a in session.query(Product):
-                #if p == j:
-                    #print_nice(a)
-                    #print(j)
-                    #break
-                #else:
-                    #j += 1
-
-        #else:
-            #continue
-
-
-
-# When adding a file to the database only updated if the date is more rencent (LAST THING TO FIX)
-
-    #for p in session.query(Product):
-        #a = str(p).split(';')
-        #name = str(a[3]).split(':')
-        #print(name[1])
-        #print(type(name[1]))
-        #d = datetime.datetime.now()
-        #dt = datetime.datetime.strptime(name[1], ' %Y-%m-%d')
-        #if d > dt:
-            #print('Great')
-
-
-
-
-
-
-
-
-
-
-
-
+# One last thing disply dates in a fancy way 
