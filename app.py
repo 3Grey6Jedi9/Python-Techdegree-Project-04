@@ -109,21 +109,6 @@ def print_date(datestrp):
 
 
 
-
-
-def inventory_updated(inventoryapp):
-    inventory0 = add_csv()
-    if inventoryapp != inventory0:
-        inventory = inventoryapp
-    else:
-        inventory = inventory0
-    return inventory
-#delete code above
-
-
-
-
-
 def backup():
 
     with open('inventory_backup.csv', 'w') as csvbackup:
