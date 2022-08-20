@@ -24,7 +24,9 @@ def add_csv():
                         for p in session.query(Product):
                             a = str(p).split(';')
                             name = str(a[0]).split(':')
-                            if name[1] == f' {new_product.product_name}':
+                            datec = str(a[3]).split(':')
+                            datecr = datetime.datetime.strptime(datec[1],' %Y-%m-%d')
+                            if name[1] == f' {new_product.product_name}' and datecr < new_product.date_update :
                                 p.product_price = new_product.product_price
                                 p.product_quantity = new_product.product_quantity
                                 p.date_update = new_product.date_update
@@ -317,6 +319,17 @@ if __name__ == '__main__':
 
 
 
+# When adding a file to the database only updated if the date is more rencent (LAST THING TO FIX)
+
+    #for p in session.query(Product):
+        #a = str(p).split(';')
+        #name = str(a[3]).split(':')
+        #print(name[1])
+        #print(type(name[1]))
+        #d = datetime.datetime.now()
+        #dt = datetime.datetime.strptime(name[1], ' %Y-%m-%d')
+        #if d > dt:
+            #print('Great')
 
 
 
