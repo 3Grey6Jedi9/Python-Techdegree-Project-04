@@ -130,6 +130,17 @@ def print_nice(a):
     \n Updated: {datetime.datetime.strftime(dt,'%B %d %Y')}''')
 # Put days more fancy
 
+def print_date_nice(datep):
+    d = datetime.datetime.strftime(datep,'%d')
+    if d == '01' or d == '21' or d == '31':
+        return datetime.datetime.strftime(datep, '%B %dst of %Y')
+    if d == '02' or d == '22':
+        return datetime.datetime.strftime(datep, '%B %dnd of %Y')
+    if d == '03' or d == '23':
+        return datetime.datetime.strftime(datep, '%B %drd of %Y')
+    else:
+        return datetime.datetime.strftime(datep, '%B %dth of %Y')
+
 
 
 
@@ -186,8 +197,9 @@ def app():
             new_date = datetime.datetime.now()
             updatedstr = datetime.datetime.strftime(new_date, '%m/%d/%Y')
             updated = clean_date(updatedstr)
-            print(updated)
-            #print date nice now I have 2022-08-20 August twenteth of 2022 
+            updated_nice = print_date_nice(updated)
+            print(updated_nice)
+            # Set the new product 
             new_product = Product(product_name=name , product_price=clean_price(price) , product_quantity=clean_quantity(quantity), date_update=clean_date(updated))
         elif choice == 'B':
             backup(inventory)
