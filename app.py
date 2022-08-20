@@ -183,10 +183,11 @@ def app():
                     print('You must enter an integer please')
                 else:
                     break
-            #Solve the date
-            new_date = str(datetime.datetime.now())
-            updated = clean_date(new_date)
+            new_date = datetime.datetime.now()
+            updatedstr = datetime.datetime.strftime(new_date, '%m/%d/%Y')
+            updated = clean_date(updatedstr)
             print(updated)
+            #print date nice now I have 2022-08-20 August twenteth of 2022 
             new_product = Product(product_name=name , product_price=clean_price(price) , product_quantity=clean_quantity(quantity), date_update=clean_date(updated))
         elif choice == 'B':
             backup(inventory)
