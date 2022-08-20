@@ -122,7 +122,6 @@ def print_nice(a):
     d = str(c[2])
     e = d.split(':')
     f = str(c[3]).split(':')
-    print(f[1])
     dt = datetime.datetime.strptime(f[1],' %Y-%m-%d')
     print(f'''\n {c[0]}
     \n{c[1]}
@@ -146,7 +145,7 @@ def print_date_nice(datep):
 
 
 
-
+# Fix option V it displays all instead of the selection
 
 
 def app():
@@ -173,9 +172,11 @@ def app():
                            for a in session.query(Product):
                                if p == j:
                                    print_nice(a)
+                                   break
                                else:
                                    j += 1
-                                   continue
+                        else:
+                            continue
                     break
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
@@ -294,6 +295,28 @@ if __name__ == '__main__':
 
     #if 'Radish' in L:
         #print(True)
+
+
+    #p = 5
+
+
+
+    #for q in session.query(Product.product_id):
+        #if p == q.product_id:
+            #j = 1
+            #for a in session.query(Product):
+                #if p == j:
+                    #print_nice(a)
+                    #print(j)
+                    #break
+                #else:
+                    #j += 1
+
+        #else:
+            #continue
+
+
+
 
 
 
