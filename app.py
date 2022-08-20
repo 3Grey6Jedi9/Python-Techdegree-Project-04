@@ -128,8 +128,8 @@ def print_nice(a):
     print(f'''\n {c[0]}
     \n{c[1]}
     \n Price: ${int(e[1])/100}
-    \n Updated: {datetime.datetime.strftime(dt,'%B %d %Y')}''')
-# Put days more fancy
+    \n Updated: {print_date_nice(dt)} ''')
+
 
 def print_date_nice(datep):
     d = datetime.datetime.strftime(datep,'%d')
@@ -232,4 +232,4 @@ if __name__ == '__main__':
     #add_csv()
 
 
-# One last thing disply dates in a fancy way 
+# One last thing disply dates in a fancy way
