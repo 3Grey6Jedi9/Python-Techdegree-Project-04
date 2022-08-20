@@ -198,9 +198,8 @@ def app():
             updatedstr = datetime.datetime.strftime(new_date, '%m/%d/%Y')
             updated = clean_date(updatedstr)
             updated_nice = print_date_nice(updated)
-            print(updated_nice)
-            # Set the new product 
-            new_product = Product(product_name=name , product_price=clean_price(price) , product_quantity=clean_quantity(quantity), date_update=clean_date(updated))
+            new_product = Product(product_name=name , product_price=price , product_quantity=clean_quantity(quantity), date_update=updated)
+            
         elif choice == 'B':
             backup(inventory)
             print(inventory)
