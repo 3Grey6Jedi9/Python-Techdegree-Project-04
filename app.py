@@ -3,6 +3,7 @@ import datetime
 import csv
 
 
+
 def add_csv():
     inventory = []
     with open('inventory.csv') as csvfile:
@@ -63,9 +64,17 @@ def menu():
             \r['V', 'A','B','E']
             \rPress enter to try again.''')
 
+
+
+
+
 def clean_quantity(quantstr):
     quantity = int(quantstr)
     return quantity
+
+
+
+
 
 def clean_price(pricestr):
     pricels = pricestr.split('$')
@@ -73,9 +82,14 @@ def clean_price(pricestr):
     return price
 
 
+
+
+
+
 def clean_date(datestr):
     date = datetime.datetime.strptime(datestr, '%m/%d/%Y')
     return date
+
 
 
 
@@ -104,6 +118,8 @@ def inventory_updated(inventoryapp):
     else:
         inventory = inventory0
     return inventory
+#delete code above
+
 
 
 
@@ -111,7 +127,7 @@ def inventory_updated(inventoryapp):
 def backup():
 
     with open('inventory_backup.csv', 'w') as csvbackup:
-        fieldnames = ['Name', 'Quantity', 'Price', 'Date']
+        fieldnames = ['     Name     ', '  Quantity  ', '  Price  ', '   Date  ']
         backupwriter = csv.DictWriter(csvbackup, fieldnames=fieldnames)
 
         backupwriter.writeheader()
@@ -131,8 +147,10 @@ def backup():
 
         i = 0
         while i < len(name):
-            backupwriter.writerow({'Name': name[i], 'Quantity': quantity[i], 'Price': price[i], 'Date': date[i]})
+            backupwriter.writerow({'     Name     ': name[i], '  Quantity  ': quantity[i], '  Price  ': price[i], '   Date  ': date[i]})
             i += 1
+
+
 
 
 
@@ -151,6 +169,11 @@ def print_nice(a):
     \n Updated: {print_date_nice(dt)} ''')
 
 
+
+
+
+
+
 def print_date_nice(datep):
     d = datetime.datetime.strftime(datep,'%d')
     if d == '01' or d == '21' or d == '31':
@@ -165,7 +188,7 @@ def print_date_nice(datep):
 
 
 
-
+# *** MAIN FUNCTION ***
 
 
 def app():
@@ -241,7 +264,7 @@ def app():
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
-    print(inventory)
+
 
 
 
