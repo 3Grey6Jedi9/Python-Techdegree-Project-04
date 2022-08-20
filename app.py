@@ -169,10 +169,24 @@ def app():
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
             name = input("Please enter the product's name: ")
-            #handle error here
-            price = clean_price(input('Please enter the price using this format[$9.99]:'))
-            quantity = int(input('Now tell my the quantity if you are so kind: '))
-            updated = datetime.datetime.now()
+            while IndexError:
+                try:
+                    price = clean_price(input('Please enter the price using this format[$9.99]:'))
+                except IndexError:
+                    print('Use the given format please')
+                else:
+                    break
+            while ValueError:
+                try:
+                    quantity = int(input('Now tell my the quantity if you are so kind: '))
+                except ValueError:
+                    print('You must enter an integer please')
+                else:
+                    break
+            #Solve the date
+            new_date = str(datetime.datetime.now())
+            updated = clean_date(new_date)
+            print(updated)
             new_product = Product(product_name=name , product_price=clean_price(price) , product_quantity=clean_quantity(quantity), date_update=clean_date(updated))
         elif choice == 'B':
             backup(inventory)
