@@ -105,16 +105,34 @@ def inventory_updated(inventoryapp):
         inventory = inventory0
     return inventory
 
-def backup(inv):
-    inventory = inventory_updated(inv)
-    with open('inventory_backup.csv', 'a') as csvbackup:
-        fieldnames = ['Name', 'Price', 'Quantity', 'Date']
+
+
+
+def backup():
+
+    with open('inventory_backup.csv', 'w') as csvbackup:
+        fieldnames = ['Name', 'Quantity', 'Price', 'Date']
         backupwriter = csv.DictWriter(csvbackup, fieldnames=fieldnames)
 
         backupwriter.writeheader()
 
-        for item in inventory:
-            backupwriter.writerow({'Name': item['Name'], 'Price': item['Price'], 'Quantity': item['Quantity'], 'Date': item['Date']})
+        name = []
+        quantity = []
+        price = []
+        date = []
+        for n in session.query(Product.product_name) :
+            name.append(n.product_name)
+        for q in session.query(Product.product_quantity):
+            quantity.append(q.product_quantity)
+        for p in session.query(Product.product_price):
+            price.append(p.product_price)
+        for d in session.query(Product.date_update):
+            date.append(d.date_update)
+
+        for item     
+        backupwriter.writerow({'Name': name.product_name})
+
+
 
 
 
@@ -217,8 +235,7 @@ def app():
                         continue
             session.commit()
         elif choice == 'B':
-            backup(inventory)
-            print(inventory)
+            backup(products)
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
@@ -228,8 +245,45 @@ def app():
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
-    app()
+    #app()
     #add_csv()
 
 
-# One last thing disply dates in a fancy way
+# One last thing BACKUP
+
+
+
+    #for p in session.query(Product):
+        #print(p)
+
+    #a = session.query(Product).all()
+    #for item in a:
+        #print(item)
+
+
+
+    #def backup():
+        #inventory = inventory_updated()
+        #with open('inventory_backup.csv', 'w') as csvbackup:
+            #fieldnames = ['Name', 'Price', 'Quantity', 'Date']
+            #backupwriter = csv.DictWriter(csvbackup, fieldnames=fieldnames)
+
+            #backupwriter.writeheader()
+
+            #for item in inventory:
+                #backupwriter.writerow({'Name': item['Name'], 'Quantity': item['Quantity'], 'Price': item['Price'], 'Date': item['Date']})
+
+    name = []
+    quantity = []
+    price = []
+    date = []
+    for n in session.query(Product.product_name):
+        name.append(n.product_name)
+    for q in session.query(Product.product_quantity):
+        quantity.append(q)
+    for p in session.query(Product.product_price):
+        price.append(p)
+    for d in session.query(Product.date_update):
+        date.append(d)
+
+    print(name)
