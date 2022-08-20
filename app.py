@@ -129,8 +129,10 @@ def backup():
         for d in session.query(Product.date_update):
             date.append(d.date_update)
 
-        for item     
-        backupwriter.writerow({'Name': name.product_name})
+        i = 0
+        while i < len(name):
+            backupwriter.writerow({'Name': name[i], 'Quantity': quantity[i], 'Price': price[i], 'Date': date[i]})
+            i += 1
 
 
 
@@ -235,7 +237,7 @@ def app():
                         continue
             session.commit()
         elif choice == 'B':
-            backup(products)
+            backup()
         else:
             print('GOODBYE SWEETHEART')
             app_running = False
@@ -245,7 +247,7 @@ def app():
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
-    #app()
+    app()
     #add_csv()
 
 
@@ -273,17 +275,3 @@ if __name__ == '__main__':
             #for item in inventory:
                 #backupwriter.writerow({'Name': item['Name'], 'Quantity': item['Quantity'], 'Price': item['Price'], 'Date': item['Date']})
 
-    name = []
-    quantity = []
-    price = []
-    date = []
-    for n in session.query(Product.product_name):
-        name.append(n.product_name)
-    for q in session.query(Product.product_quantity):
-        quantity.append(q)
-    for p in session.query(Product.product_price):
-        price.append(p)
-    for d in session.query(Product.date_update):
-        date.append(d)
-
-    print(name)
