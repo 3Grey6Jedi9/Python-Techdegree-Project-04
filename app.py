@@ -169,38 +169,11 @@ def app():
         elif choice == 'A':
             message = input("You have selected adding a new product...Press Enter to proceed")
             name = input("Please enter the product's name: ")
-            while IndexError:
-                try:
-                    price = clean_price(input("Please enter the product's price[for example:$9.99]:"))
-                except IndexError:
-                    print('You must use the right format, please try again')
-                else:
-                    break
-            while ValueError:
-                try:
-                    quantity = clean_quantity(input("Now I'll need you to tell me the quantity: "))
-                except:
-                    print('You must enter an integer please, try again')
-                else:
-                    break
-            date = datetime.datetime.now()
-            new_product = Product(product_name=name, product_price=price, product_quantity=quantity, date_update=date)
-            for p in session.query(Product):
-                a = str(p).split(';')
-                name = str(a[0]).split(':')
-                if name[1] != f' {new_product.product_name}':
-                    continue
-                else:
-                    p = new_product
-            session.add(new_product)
-            session.commit()
-            dict = {'Name': new_product.product_name, 'Price': new_product.product_price,
-                        'Quantity': new_product.product_quantity, 'Date': new_product.date_update}
-            for d in inventory:
-                if d['Name'] == dict['Name']:
-                    inventory.remove(d)
-            inventory.append(dict)
-            inventory_updated(inventory)
+            #handle error here
+            price = clean_price(input('Please enter the price using this format[$9.99]:'))
+            quantity = int(input('Now tell my the quantity if you are so kind: '))
+            updated = datetime.datetime.now()
+            new_product = Product(product_name=name , product_price=clean_price(price) , product_quantity=clean_quantity(quantity), date_update=clean_date(updated))
         elif choice == 'B':
             backup(inventory)
             print(inventory)
