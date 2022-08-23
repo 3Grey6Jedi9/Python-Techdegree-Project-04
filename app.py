@@ -5,7 +5,7 @@ import csv
 
 
 def add_csv():
-    inventory = []
+
     with open('inventory.csv') as csvfile:
         data = csv.reader(csvfile)
         for row in data:
@@ -20,13 +20,13 @@ def add_csv():
                         L.append(p.product_name)
                     if f'{new_product.product_name}' not in L:
                         session.add(new_product)
-                        inventory.append(dict)
                     else:
                         for p in session.query(Product):
                             a = str(p).split(';')
                             name = str(a[0]).split(':')
                             datec = str(a[3]).split(':')
-                            datecr = datetime.datetime.strptime(datec[1],' %Y-%m-%d')
+                            datecrt = str(datec[1]).split(' ')
+                            datecr = datetime.datetime.strptime(datecrt[1],'%Y-%m-%d')
                             if name[1] == f' {new_product.product_name}' and datecr < new_product.date_update :
                                 p.product_price = new_product.product_price
                                 p.product_quantity = new_product.product_quantity
@@ -35,7 +35,6 @@ def add_csv():
                                 continue
                 if session.query(Product).count() < 27:
                     session.add(new_product)
-                    inventory.append(dict)
         session.commit()
         products = session.query(Product)
         return products
@@ -146,8 +145,8 @@ def print_nice(a):
     c = b.split(';')
     d = str(c[2])
     e = d.split(':')
-    f = str(c[3]).split(':')
-    dt = datetime.datetime.strptime(f[1],' %Y-%m-%d')
+    f = str(c[3]).split(' ')
+    dt = datetime.datetime.strptime(f[2],'%Y-%m-%d')
     print(f'''\n {c[0]}
     \n{c[1]}
     \n Price: ${int(e[1])/100}
@@ -257,3 +256,9 @@ if __name__ == '__main__':
     Base.metadata.create_all(engine)
     app()
     #add_csv()
+
+
+
+
+
+
